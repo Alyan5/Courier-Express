@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { Package, Home, LogOut, PlusCircle } from 'lucide-react'
 
-export default function Sidebar() {
+export default function CustomerSidebar() {
   const location = useLocation()
 
   const handleLogout = () => {
@@ -10,14 +10,14 @@ export default function Sidebar() {
   }
 
   const menuItems = [
-    { path: '/staff/dashboard', label: 'Dashboard', icon: Home },
-    { path: '/staff/parcels', label: 'All Parcels', icon: Package },
-    { path: '/staff/add-parcel', label: 'Add Parcel', icon: PlusCircle },
+    { path: '/customer/dashboard', label: 'Dashboard', icon: Home },
+    { path: '/customer/parcels', label: 'My Parcels', icon: Package },
+    { path: '/customer/send-parcel', label: 'Send Parcel', icon: PlusCircle },
   ]
 
   return (
     <div className="bg-slate-900 text-white w-64 min-h-screen p-5 border-r border-slate-800">
-      <div className="text-2xl font-bold mb-12 tracking-tight">Courier Staff</div>
+      <div className="text-2xl font-bold mb-12 tracking-tight">Courier Customer</div>
       <nav className="space-y-2">
         {menuItems.map(item => (
           <Link

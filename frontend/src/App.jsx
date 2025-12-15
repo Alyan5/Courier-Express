@@ -4,7 +4,14 @@ import Login from './pages/Auth/Login'
 import Signup from './pages/Auth/Signup'
 import StaffDashboard from './pages/Staff/StaffDashboard'
 import AllParcels from './pages/Staff/AllParcels'
+import AddParcel from './pages/Staff/AddParcel'
+import EditParcel from './pages/Staff/EditParcel'
 import ParcelDetails from './pages/Staff/ParcelDetails'
+import CustomerDashboard from './pages/Customer/CustomerDashboard'
+import MyParcels from './pages/Customer/MyParcels'
+import SendParcel from './pages/Customer/SendParcel'
+import RiderDashboard from './pages/Rider/RiderDashboard'
+import RiderParcels from './pages/Rider/RiderParcels'
 
 // Protected Route Component
 function ProtectedRoute({ children, allowedRole }) {
@@ -60,6 +67,8 @@ function AppContent() {
           <Routes>
             <Route path="/staff/dashboard" element={<ProtectedRoute allowedRole="staff"><StaffDashboard /></ProtectedRoute>} />
             <Route path="/staff/parcels" element={<ProtectedRoute allowedRole="staff"><AllParcels /></ProtectedRoute>} />
+            <Route path="/staff/add-parcel" element={<ProtectedRoute allowedRole="staff"><AddParcel /></ProtectedRoute>} />
+            <Route path="/staff/edit-parcel/:id" element={<ProtectedRoute allowedRole="staff"><EditParcel /></ProtectedRoute>} />
             <Route path="/staff/parcel/:id" element={<ProtectedRoute allowedRole="staff"><ParcelDetails /></ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/staff/dashboard" replace />} />
           </Routes>
@@ -67,14 +76,17 @@ function AppContent() {
       } else if (role === 'customer') {
         return (
           <Routes>
-            <Route path="/customer/dashboard" element={<div className="p-8"><h1 className="text-2xl font-bold">Customer Dashboard (Coming Soon)</h1></div>} />
+            <Route path="/customer/dashboard" element={<ProtectedRoute allowedRole="customer"><CustomerDashboard /></ProtectedRoute>} />
+            <Route path="/customer/parcels" element={<ProtectedRoute allowedRole="customer"><MyParcels /></ProtectedRoute>} />
+            <Route path="/customer/send-parcel" element={<ProtectedRoute allowedRole="customer"><SendParcel /></ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/customer/dashboard" replace />} />
           </Routes>
         )
       } else if (role === 'rider') {
         return (
           <Routes>
-            <Route path="/rider/dashboard" element={<div className="p-8"><h1 className="text-2xl font-bold">Rider Dashboard (Coming Soon)</h1></div>} />
+            <Route path="/rider/dashboard" element={<ProtectedRoute allowedRole="rider"><RiderDashboard /></ProtectedRoute>} />
+            <Route path="/rider/parcels" element={<ProtectedRoute allowedRole="rider"><RiderParcels /></ProtectedRoute>} />
             <Route path="*" element={<Navigate to="/rider/dashboard" replace />} />
           </Routes>
         )
