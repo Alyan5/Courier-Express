@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from datetime import datetime
 
 class UserCreate(BaseModel):
     name: str
@@ -49,7 +50,10 @@ class ParcelOut(BaseModel):
     weight_kg: float
     current_status: str
     charges: float
-    booked_at: Optional[str] = None
+    booked_at: Optional[datetime] = None
     
     class Config:
         from_attributes = True
+        json_encoders = {
+            datetime: lambda v: v.isoformat() if v else None
+        }

@@ -32,18 +32,30 @@ def create_access_token(data: dict):
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 def decode_token(token: str):
+    import logging
+    logger = logging.getLogger(__name__)
+    
     try:
         if not token:
+            logger.error("Token is empty or None")
             return None
-        return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        if not SECRET_KEY:
+            logger.error("SECRET_KEY is not configured!")
+            return None
+        
+        logger.info(f"Decoding token (first 20 chars): {token[:20]}...")
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        logger.info(f"Token decoded successfully: {payload}")
+        return payload
     except jwt.ExpiredSignatureError:
         # Token has expired
+        logger.error("Token has expired")
         return None
-    except jwt.InvalidTokenError:
+    except jwt.InvalidTokenError as e:
         # Invalid token
+        logger.error(f"Invalid token: {str(e)}")
         return None
     except Exception as e:
         # Unexpected error
-        import logging
-        logging.getLogger(__name__).error(f"Token decode error: {str(e)}")
+        logger.error(f"Token decode error: {str(e)}")
         return None

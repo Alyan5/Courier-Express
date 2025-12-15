@@ -25,7 +25,9 @@ export default function StaffDashboard() {
           delivered: parcels.filter(p => p.current_status === 'delivered').length
         })
       } catch (err) {
-        console.error('Failed to load stats')
+        console.error('Failed to load stats:', err)
+        const errorMsg = err.response?.data?.detail || err.message || 'Failed to load stats'
+        console.error('Error details:', errorMsg)
       } finally {
         setLoading(false)
       }
