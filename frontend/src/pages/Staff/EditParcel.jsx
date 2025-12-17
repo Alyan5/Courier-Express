@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import api from '../../services/api'
 import Navbar from '../../assets/components/Navbar'
 import Sidebar from '../../assets/components/Sidebar'
-import { User, Phone, MapPin, Weight } from 'lucide-react'
 
 export default function EditParcel() {
   const { id } = useParams()
@@ -73,12 +72,12 @@ export default function EditParcel() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen bg-gray-100">
+      <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f3f4f6' }}>
         <Sidebar />
-        <div className="flex-1">
+        <div style={{ flex: 1 }}>
           <Navbar />
-          <div className="p-8">
-            <div className="text-center py-10">Loading parcel details...</div>
+          <div style={{ padding: '32px' }}>
+            <div style={{ textAlign: 'center', padding: '40px' }}>Loading parcel details...</div>
           </div>
         </div>
       </div>
@@ -86,23 +85,22 @@ export default function EditParcel() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f3f4f6' }}>
       <Sidebar />
-      <div className="flex-1">
+      <div style={{ flex: 1 }}>
         <Navbar />
-        <div className="p-8">
-          <div className="max-w-3xl mx-auto">
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">Edit Parcel</h2>
-              <p className="text-gray-600">Update parcel details</p>
+        <div style={{ padding: '32px' }}>
+          <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <div style={{ marginBottom: '32px' }}>
+              <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: '#1f2937', marginBottom: '8px' }}>Edit Parcel</h2>
+              <p style={{ color: '#6b7280' }}>Update parcel details</p>
             </div>
 
-            <div className="bg-white rounded-lg shadow-md p-8">
+            <div style={{ backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', padding: '32px' }}>
               <form onSubmit={handleSubmit}>
                 {/* Receiver Name */}
-                <div className="mb-6">
-                  <label className="block text-gray-700 font-semibold mb-2">
-                    <User className="inline mr-2" size={18} />
+                <div style={{ marginBottom: '24px' }}>
+                  <label style={{ display: 'block', color: '#374151', fontWeight: '600', marginBottom: '8px' }}>
                     Receiver Name
                   </label>
                   <input
@@ -111,15 +109,20 @@ export default function EditParcel() {
                     value={formData.receiverName}
                     onChange={handleChange}
                     placeholder="John Doe"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    style={{ 
+                      width: '100%',
+                      padding: '12px 16px',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '16px'
+                    }}
                     required
                   />
                 </div>
 
                 {/* Receiver Phone */}
-                <div className="mb-6">
-                  <label className="block text-gray-700 font-semibold mb-2">
-                    <Phone className="inline mr-2" size={18} />
+                <div style={{ marginBottom: '24px' }}>
+                  <label style={{ display: 'block', color: '#374151', fontWeight: '600', marginBottom: '8px' }}>
                     Receiver Phone
                   </label>
                   <input
@@ -128,15 +131,20 @@ export default function EditParcel() {
                     value={formData.receiverPhone}
                     onChange={handleChange}
                     placeholder="+92 300 1234567"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    style={{ 
+                      width: '100%',
+                      padding: '12px 16px',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '16px'
+                    }}
                     required
                   />
                 </div>
 
                 {/* Receiver Address */}
-                <div className="mb-6">
-                  <label className="block text-gray-700 font-semibold mb-2">
-                    <MapPin className="inline mr-2" size={18} />
+                <div style={{ marginBottom: '24px' }}>
+                  <label style={{ display: 'block', color: '#374151', fontWeight: '600', marginBottom: '8px' }}>
                     Receiver Address
                   </label>
                   <textarea
@@ -145,15 +153,21 @@ export default function EditParcel() {
                     onChange={handleChange}
                     placeholder="Street, City, Country"
                     rows="3"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    style={{ 
+                      width: '100%',
+                      padding: '12px 16px',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '16px',
+                      fontFamily: 'inherit'
+                    }}
                     required
                   />
                 </div>
 
                 {/* Weight */}
-                <div className="mb-6">
-                  <label className="block text-gray-700 font-semibold mb-2">
-                    <Weight className="inline mr-2" size={18} />
+                <div style={{ marginBottom: '24px' }}>
+                  <label style={{ display: 'block', color: '#374151', fontWeight: '600', marginBottom: '8px' }}>
                     Weight (kg)
                   </label>
                   <input
@@ -164,33 +178,58 @@ export default function EditParcel() {
                     placeholder="5.5"
                     step="0.1"
                     min="0.1"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    style={{ 
+                      width: '100%',
+                      padding: '12px 16px',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontSize: '16px'
+                    }}
                     required
                   />
-                  <p className="text-sm text-gray-500 mt-1">Rate: Rs.50 per kg</p>
+                  <p style={{ fontSize: '14px', color: '#6b7280', marginTop: '4px' }}>Rate: Rs.50 per kg</p>
                 </div>
 
                 {/* Estimated Charges */}
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-700 font-semibold">Updated Charges:</span>
-                    <span className="text-2xl font-bold text-blue-700">Rs.{estimatedCharges}</span>
+                <div style={{ backgroundColor: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '8px', padding: '16px', marginBottom: '24px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ color: '#374151', fontWeight: '600' }}>Updated Charges:</span>
+                    <span style={{ fontSize: '24px', fontWeight: 'bold', color: '#1d4ed8' }}>Rs.{estimatedCharges}</span>
                   </div>
                 </div>
 
                 {/* Buttons */}
-                <div className="flex gap-4">
+                <div style={{ display: 'flex', gap: '16px' }}>
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    style={{ 
+                      flex: 1,
+                      backgroundColor: submitting ? '#9ca3af' : '#2563eb',
+                      color: 'white',
+                      padding: '12px 24px',
+                      borderRadius: '8px',
+                      fontWeight: '600',
+                      border: 'none',
+                      cursor: submitting ? 'not-allowed' : 'pointer',
+                      fontSize: '16px'
+                    }}
                   >
                     {submitting ? 'Updating...' : 'Update Parcel'}
                   </button>
                   <button
                     type="button"
                     onClick={() => navigate('/staff/parcels')}
-                    className="px-6 py-3 border border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition"
+                    style={{ 
+                      padding: '12px 24px',
+                      border: '1px solid #d1d5db',
+                      borderRadius: '8px',
+                      fontWeight: '600',
+                      color: '#374151',
+                      backgroundColor: 'white',
+                      cursor: 'pointer',
+                      fontSize: '16px'
+                    }}
                   >
                     Cancel
                   </button>

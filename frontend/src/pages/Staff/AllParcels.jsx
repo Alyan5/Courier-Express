@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import api from '../../services/api'
 import { Link } from 'react-router-dom'
-import { Search, PlusCircle, Edit2, Eye } from 'lucide-react'
 import Navbar from '../../assets/components/Navbar'
 import Sidebar from '../../assets/components/Sidebar'
 import StatusBadge from '../../assets/components/StatusBadge'
@@ -40,73 +39,120 @@ export default function AllParcels() {
   })
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f3f4f6' }}>
       <Sidebar />
-      <div className="flex-1">
+      <div style={{ flex: 1 }}>
         <Navbar />
-        <div className="p-8">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800">All Parcels</h2>
+        <div style={{ padding: '32px' }}>
+          
+          {/* Page Header */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: '#1f2937' }}>All Parcels</h2>
             <Link 
               to="/staff/add-parcel"
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center gap-2"
+              style={{ 
+                backgroundColor: '#2563eb',
+                color: 'white',
+                padding: '12px 24px',
+                borderRadius: '8px',
+                fontWeight: '600',
+                textDecoration: 'none',
+                display: 'inline-block'
+              }}
             >
-              <PlusCircle size={20} />
               Add New Parcel
             </Link>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6 mb-6">
-            <div className="relative mb-6">
-              <Search className="absolute left-3 top-3 text-gray-400" size={20} />
+          {/* Main Content Box */}
+          <div style={{ backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', padding: '24px', marginBottom: '24px' }}>
+            
+            {/* Search Box */}
+            <div style={{ marginBottom: '24px' }}>
               <input
                 type="text"
                 placeholder="Search by tracking number or receiver..."
-                className="w-full pl-10 pr-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                style={{ 
+                  width: '100%',
+                  padding: '12px 16px',
+                  border: '1px solid #d1d5db',
+                  borderRadius: '8px',
+                  fontSize: '16px'
+                }}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
 
             {loading ? (
-              <div className="text-center py-10">Loading parcels...</div>
+              <div style={{ textAlign: 'center', padding: '40px', color: '#6b7280' }}>
+                Loading parcels...
+              </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="text-left py-4 px-6 font-semibold text-gray-700">Tracking #</th>
-                      <th className="text-left py-4 px-6 font-semibold text-gray-700">Receiver</th>
-                      <th className="text-left py-4 px-6 font-semibold text-gray-700">Weight</th>
-                      <th className="text-left py-4 px-6 font-semibold text-gray-700">Status</th>
-                      <th className="text-left py-4 px-6 font-semibold text-gray-700">Actions</th>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                  <thead>
+                    <tr style={{ backgroundColor: '#f9fafb' }}>
+                      <th style={{ textAlign: 'left', padding: '16px 24px', fontWeight: '600', color: '#374151' }}>
+                        Tracking #
+                      </th>
+                      <th style={{ textAlign: 'left', padding: '16px 24px', fontWeight: '600', color: '#374151' }}>
+                        Receiver
+                      </th>
+                      <th style={{ textAlign: 'left', padding: '16px 24px', fontWeight: '600', color: '#374151' }}>
+                        Weight
+                      </th>
+                      <th style={{ textAlign: 'left', padding: '16px 24px', fontWeight: '600', color: '#374151' }}>
+                        Status
+                      </th>
+                      <th style={{ textAlign: 'left', padding: '16px 24px', fontWeight: '600', color: '#374151' }}>
+                        Actions
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredParcels.map(parcel => (
-                      <tr key={parcel.parcel_id} className="border-t hover:bg-gray-50 transition">
-                        <td className="py-4 px-6 font-mono text-primary">{parcel.tracking_number || 'N/A'}</td>
-                        <td className="py-4 px-6">{parcel.receiver_name || 'N/A'}</td>
-                        <td className="py-4 px-6">{parcel.weight_kg || 0} kg</td>
-                        <td className="py-4 px-6">
+                      <tr key={parcel.parcel_id} style={{ borderTop: '1px solid #e5e7eb' }}>
+                        <td style={{ padding: '16px 24px', fontFamily: 'monospace', color: '#2563eb' }}>
+                          {parcel.tracking_number || 'N/A'}
+                        </td>
+                        <td style={{ padding: '16px 24px' }}>
+                          {parcel.receiver_name || 'N/A'}
+                        </td>
+                        <td style={{ padding: '16px 24px' }}>
+                          {parcel.weight_kg || 0} kg
+                        </td>
+                        <td style={{ padding: '16px 24px' }}>
                           <StatusBadge status={parcel.current_status || 'unknown'} />
                         </td>
-                        <td className="py-4 px-6">
-                          <div className="flex gap-2">
+                        <td style={{ padding: '16px 24px' }}>
+                          <div style={{ display: 'flex', gap: '8px' }}>
                             <Link 
                               to={`/staff/parcel/${parcel.parcel_id}`}
-                              className="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition flex items-center gap-1"
+                              style={{ 
+                                backgroundColor: '#2563eb',
+                                color: 'white',
+                                padding: '8px 12px',
+                                borderRadius: '6px',
+                                textDecoration: 'none',
+                                fontSize: '14px'
+                              }}
                               title="View Details"
                             >
-                              <Eye size={16} />
                               View
                             </Link>
                             <Link 
                               to={`/staff/edit-parcel/${parcel.parcel_id}`}
-                              className="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 transition flex items-center gap-1"
+                              style={{ 
+                                backgroundColor: '#16a34a',
+                                color: 'white',
+                                padding: '8px 12px',
+                                borderRadius: '6px',
+                                textDecoration: 'none',
+                                fontSize: '14px'
+                              }}
                               title="Edit Parcel"
                             >
-                              <Edit2 size={16} />
                               Edit
                             </Link>
                           </div>
@@ -116,7 +162,9 @@ export default function AllParcels() {
                   </tbody>
                 </table>
                 {filteredParcels.length === 0 && (
-                  <div className="p-10 text-center text-gray-500">No parcels found</div>
+                  <div style={{ padding: '40px', textAlign: 'center', color: '#6b7280' }}>
+                    No parcels found
+                  </div>
                 )}
               </div>
             )}

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import api from '../../services/api'
 import RiderNavbar from '../../assets/components/RiderNavbar'
 import RiderSidebar from '../../assets/components/RiderSidebar'
-import { Package, TrendingUp } from 'lucide-react'
 
 export default function RiderDashboard() {
   const [stats, setStats] = useState({
@@ -41,88 +40,97 @@ export default function RiderDashboard() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f9fafb' }}>
       <RiderSidebar />
-      <div className="flex-1">
+      <div style={{ flex: 1 }}>
         <RiderNavbar />
-        <div className="p-8">
-          <h2 className="text-4xl font-bold mb-8 text-gray-900">Rider Dashboard</h2>
+        <div style={{ padding: '32px' }}>
+          <h2 style={{ fontSize: '32px', fontWeight: 'bold', marginBottom: '32px', color: '#111827' }}>Rider Dashboard</h2>
 
           {loading ? (
-            <div className="text-center py-10 text-gray-600">Loading dashboard...</div>
+            <div style={{ textAlign: 'center', padding: '40px', color: '#6b7280' }}>Loading dashboard...</div>
           ) : (
             <>
               {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                  <h3 className="text-gray-600 text-sm font-medium uppercase tracking-wide">Total Assigned</h3>
-                  <p className="text-5xl font-bold text-blue-700 mt-4">{stats.total}</p>
-                  <div className="h-1 w-12 bg-blue-700 rounded mt-4"></div>
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+                gap: '24px',
+                marginBottom: '32px'
+              }}>
+                <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '12px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', border: '1px solid #e5e7eb' }}>
+                  <h3 style={{ color: '#6b7280', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Assigned</h3>
+                  <p style={{ fontSize: '48px', fontWeight: 'bold', color: '#1d4ed8', marginTop: '16px' }}>{stats.total}</p>
+                  <div style={{ height: '4px', width: '48px', backgroundColor: '#1d4ed8', borderRadius: '2px', marginTop: '16px' }}></div>
                 </div>
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                  <h3 className="text-gray-600 text-sm font-medium uppercase tracking-wide">Pending Pickup</h3>
-                  <p className="text-5xl font-bold text-amber-600 mt-4">{stats.pending}</p>
-                  <div className="h-1 w-12 bg-amber-600 rounded mt-4"></div>
+                <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '12px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', border: '1px solid #e5e7eb' }}>
+                  <h3 style={{ color: '#6b7280', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Pending Pickup</h3>
+                  <p style={{ fontSize: '48px', fontWeight: 'bold', color: '#d97706', marginTop: '16px' }}>{stats.pending}</p>
+                  <div style={{ height: '4px', width: '48px', backgroundColor: '#d97706', borderRadius: '2px', marginTop: '16px' }}></div>
                 </div>
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                  <h3 className="text-gray-600 text-sm font-medium uppercase tracking-wide">In Transit</h3>
-                  <p className="text-5xl font-bold text-purple-600 mt-4">{stats.transit}</p>
-                  <div className="h-1 w-12 bg-purple-600 rounded mt-4"></div>
+                <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '12px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', border: '1px solid #e5e7eb' }}>
+                  <h3 style={{ color: '#6b7280', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>In Transit</h3>
+                  <p style={{ fontSize: '48px', fontWeight: 'bold', color: '#9333ea', marginTop: '16px' }}>{stats.transit}</p>
+                  <div style={{ height: '4px', width: '48px', backgroundColor: '#9333ea', borderRadius: '2px', marginTop: '16px' }}></div>
                 </div>
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                  <h3 className="text-gray-600 text-sm font-medium uppercase tracking-wide">Delivered</h3>
-                  <p className="text-5xl font-bold text-teal-600 mt-4">{stats.delivered}</p>
-                  <div className="h-1 w-12 bg-teal-600 rounded mt-4"></div>
+                <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '12px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', border: '1px solid #e5e7eb' }}>
+                  <h3 style={{ color: '#6b7280', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Delivered</h3>
+                  <p style={{ fontSize: '48px', fontWeight: 'bold', color: '#0d9488', marginTop: '16px' }}>{stats.delivered}</p>
+                  <div style={{ height: '4px', width: '48px', backgroundColor: '#0d9488', borderRadius: '2px', marginTop: '16px' }}></div>
                 </div>
               </div>
 
               {/* Recent Parcels */}
-              <div className="bg-white rounded-lg shadow p-6">
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-2xl font-bold text-gray-800">My Deliveries</h3>
+              <div style={{ backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', padding: '24px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+                  <h3 style={{ fontSize: '24px', fontWeight: 'bold', color: '#1f2937' }}>My Deliveries</h3>
                   <Link 
                     to="/rider/parcels" 
-                    className="text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+                    style={{ color: '#2563eb', fontWeight: '600', textDecoration: 'none' }}
                   >
                     View All
-                    <TrendingUp size={18} />
                   </Link>
                 </div>
                 
                 {recentParcels.length > 0 ? (
-                  <div className="space-y-4">
+                  <div>
                     {recentParcels.map(parcel => (
                       <div 
                         key={parcel.parcel_id} 
-                        className="flex justify-between items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
+                        style={{ 
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          padding: '16px',
+                          backgroundColor: '#f9fafb',
+                          borderRadius: '8px',
+                          marginBottom: '16px'
+                        }}
                       >
-                        <div className="flex items-center gap-4">
-                          <div className="bg-blue-100 p-3 rounded-lg">
-                            <Package className="text-blue-600" size={24} />
-                          </div>
-                          <div>
-                            <p className="font-mono font-semibold text-gray-800">{parcel.tracking_number}</p>
-                            <p className="text-sm text-gray-600">To: {parcel.receiver_name}</p>
-                            <p className="text-xs text-gray-500">{parcel.receiver_address}</p>
-                          </div>
+                        <div>
+                          <p style={{ fontFamily: 'monospace', fontWeight: '600', color: '#1f2937' }}>{parcel.tracking_number}</p>
+                          <p style={{ fontSize: '14px', color: '#6b7280' }}>To: {parcel.receiver_name}</p>
+                          <p style={{ fontSize: '12px', color: '#9ca3af' }}>{parcel.receiver_address}</p>
                         </div>
-                        <div className="text-right">
-                          <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                            parcel.current_status === 'delivered' ? 'bg-green-100 text-green-700' :
-                            parcel.current_status === 'in transit' || parcel.current_status === 'out for delivery' ? 'bg-blue-100 text-blue-700' :
-                            'bg-yellow-100 text-yellow-700'
-                          }`}>
+                        <div style={{ textAlign: 'right' }}>
+                          <span style={{ 
+                            padding: '4px 12px',
+                            borderRadius: '12px',
+                            fontSize: '12px',
+                            fontWeight: '600',
+                            backgroundColor: parcel.current_status === 'delivered' ? '#dcfce7' : (parcel.current_status === 'in transit' || parcel.current_status === 'out for delivery') ? '#dbeafe' : '#fef3c7',
+                            color: parcel.current_status === 'delivered' ? '#15803d' : (parcel.current_status === 'in transit' || parcel.current_status === 'out for delivery') ? '#1d4ed8' : '#a16207'
+                          }}>
                             {parcel.current_status}
                           </span>
-                          <p className="text-sm text-gray-600 mt-1">{parcel.weight_kg} kg</p>
+                          <p style={{ fontSize: '14px', color: '#6b7280', marginTop: '4px' }}>{parcel.weight_kg} kg</p>
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-10">
-                    <Package className="mx-auto text-gray-400 mb-4" size={48} />
-                    <p className="text-gray-600">No parcels assigned yet</p>
+                  <div style={{ textAlign: 'center', padding: '40px' }}>
+                    <p style={{ color: '#6b7280' }}>No parcels assigned yet</p>
                   </div>
                 )}
               </div>

@@ -4,7 +4,6 @@ import api from '../../services/api'
 import Navbar from '../../assets/components/Navbar'
 import Sidebar from '../../assets/components/Sidebar'
 import StatusBadge from '../../assets/components/StatusBadge'
-import { Edit2 } from 'lucide-react'
 
 export default function ParcelDetails() {
   const { id } = useParams()
@@ -69,75 +68,89 @@ export default function ParcelDetails() {
   }
 
   if (loading) return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f3f4f6' }}>
       <Sidebar />
-      <div className="flex-1">
+      <div style={{ flex: 1 }}>
         <Navbar />
-        <div className="p-10 text-center">Loading parcel details...</div>
+        <div style={{ padding: '40px', textAlign: 'center' }}>Loading parcel details...</div>
       </div>
     </div>
   )
   
   if (!parcel) return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f3f4f6' }}>
       <Sidebar />
-      <div className="flex-1">
+      <div style={{ flex: 1 }}>
         <Navbar />
-        <div className="p-10 text-center">Parcel not found</div>
+        <div style={{ padding: '40px', textAlign: 'center' }}>Parcel not found</div>
       </div>
     </div>
   )
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f3f4f6' }}>
       <Sidebar />
-      <div className="flex-1">
+      <div style={{ flex: 1 }}>
         <Navbar />
-        <div className="p-8">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800">Parcel Details</h2>
+        <div style={{ padding: '32px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
+            <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: '#1f2937' }}>Parcel Details</h2>
             <button
               onClick={() => navigate(`/staff/edit-parcel/${id}`)}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center gap-2"
+              style={{ 
+                backgroundColor: '#2563eb',
+                color: 'white',
+                padding: '12px 24px',
+                borderRadius: '8px',
+                fontWeight: '600',
+                border: 'none',
+                cursor: 'pointer'
+              }}
             >
-              <Edit2 size={20} />
               Edit Parcel
             </button>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-8 mb-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Parcel Info */}
+          <div style={{ backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', padding: '32px', marginBottom: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px' }}>
               <div>
-                <h3 className="font-semibold text-gray-600 mb-2">Tracking Number</h3>
-                <p className="text-2xl font-mono text-primary">{parcel.tracking_number}</p>
+                <h3 style={{ fontWeight: '600', color: '#6b7280', marginBottom: '8px' }}>Tracking Number</h3>
+                <p style={{ fontSize: '24px', fontFamily: 'monospace', color: '#2563eb' }}>{parcel.tracking_number}</p>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-600 mb-2">Current Status</h3>
+                <h3 style={{ fontWeight: '600', color: '#6b7280', marginBottom: '8px' }}>Current Status</h3>
                 <StatusBadge status={parcel.current_status} />
               </div>
               <div>
-                <h3 className="font-semibold text-gray-600 mb-2">Receiver</h3>
-                <p className="text-lg">{parcel.receiver_name}</p>
-                <p className="text-gray-600">{parcel.receiver_phone}</p>
+                <h3 style={{ fontWeight: '600', color: '#6b7280', marginBottom: '8px' }}>Receiver</h3>
+                <p style={{ fontSize: '18px' }}>{parcel.receiver_name}</p>
+                <p style={{ color: '#6b7280' }}>{parcel.receiver_phone}</p>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-600 mb-2">Delivery Address</h3>
-                <p className="text-lg">{parcel.receiver_address}</p>
+                <h3 style={{ fontWeight: '600', color: '#6b7280', marginBottom: '8px' }}>Delivery Address</h3>
+                <p style={{ fontSize: '18px' }}>{parcel.receiver_address}</p>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-600 mb-2">Weight & Charges</h3>
-                <p className="text-lg">{parcel.weight_kg} kg - Rs. {parcel.charges}</p>
+                <h3 style={{ fontWeight: '600', color: '#6b7280', marginBottom: '8px' }}>Weight & Charges</h3>
+                <p style={{ fontSize: '18px' }}>{parcel.weight_kg} kg - Rs. {parcel.charges}</p>
               </div>
             </div>
           </div>
 
           {/* Assign Rider */}
-          <div className="bg-white rounded-lg shadow p-8 mb-6">
-            <h2 className="text-xl font-bold mb-6 text-gray-800">Assign Rider</h2>
+          <div style={{ backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', padding: '32px', marginBottom: '24px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '24px', color: '#1f2937' }}>Assign Rider</h2>
             {riders.length > 0 ? (
-              <div className="flex gap-4 items-center">
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
                 <select 
-                  className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500" 
+                  style={{ 
+                    flex: 1,
+                    padding: '12px',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '8px',
+                    fontSize: '16px'
+                  }}
                   value={selectedRider} 
                   onChange={(e) => setSelectedRider(e.target.value)}
                 >
@@ -150,22 +163,36 @@ export default function ParcelDetails() {
                 </select>
                 <button 
                   onClick={assignRider} 
-                  className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-semibold"
+                  style={{ 
+                    backgroundColor: '#2563eb',
+                    color: 'white',
+                    padding: '12px 32px',
+                    borderRadius: '8px',
+                    fontWeight: '600',
+                    border: 'none',
+                    cursor: 'pointer'
+                  }}
                 >
                   Assign Rider
                 </button>
               </div>
             ) : (
-              <p className="text-gray-600">No riders available. Please create rider accounts first.</p>
+              <p style={{ color: '#6b7280' }}>No riders available. Please create rider accounts first.</p>
             )}
           </div>
 
           {/* Update Status */}
-          <div className="bg-white rounded-lg shadow p-8">
-            <h2 className="text-xl font-bold mb-6 text-gray-800">Update Parcel Status</h2>
-            <div className="flex gap-4 items-center">
+          <div style={{ backgroundColor: 'white', borderRadius: '8px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', padding: '32px' }}>
+            <h2 style={{ fontSize: '20px', fontWeight: 'bold', marginBottom: '24px', color: '#1f2937' }}>Update Parcel Status</h2>
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <select 
-                className="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500" 
+                style={{ 
+                  flex: 1,
+                  padding: '12px',
+                  border: '1px solid #d1d5db',
+                  borderRadius: '8px',
+                  fontSize: '16px'
+                }}
                 value={newStatus} 
                 onChange={(e) => setNewStatus(e.target.value)}
               >
@@ -178,7 +205,15 @@ export default function ParcelDetails() {
               </select>
               <button 
                 onClick={updateStatus} 
-                className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition font-semibold"
+                style={{ 
+                  backgroundColor: '#16a34a',
+                  color: 'white',
+                  padding: '12px 32px',
+                  borderRadius: '8px',
+                  fontWeight: '600',
+                  border: 'none',
+                  cursor: 'pointer'
+                }}
               >
                 Update Status
               </button>
