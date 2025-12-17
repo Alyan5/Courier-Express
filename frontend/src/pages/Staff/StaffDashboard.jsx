@@ -36,36 +36,92 @@ export default function StaffDashboard() {
   }, [])
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f9fafb' }}>
       <Sidebar />
-      <div className="flex-1">
+      <div style={{ flex: 1 }}>
         <Navbar />
-        <div className="p-8 bg-gray-50">
-          <h2 className="text-4xl font-bold mb-8 text-gray-900">Staff Dashboard</h2>
+        <div style={{ padding: '32px' }}>
+          <h2 style={{ fontSize: '32px', fontWeight: 'bold', marginBottom: '32px', color: '#111827' }}>
+            Staff Dashboard
+          </h2>
 
           {loading ? (
-            <div className="text-center py-10 text-gray-600">Loading stats...</div>
+            <div style={{ textAlign: 'center', padding: '40px', color: '#6b7280' }}>
+              Loading stats...
+            </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                <h3 className="text-gray-600 text-sm font-medium uppercase tracking-wide">Total Parcels Today</h3>
-                <p className="text-5xl font-bold text-blue-700 mt-4">{stats.total}</p>
-                <div className="h-1 w-12 bg-blue-700 rounded mt-4"></div>
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+              gap: '24px' 
+            }}>
+              
+              {/* Total Parcels Card */}
+              <div style={{ 
+                backgroundColor: 'white', 
+                padding: '24px', 
+                borderRadius: '12px', 
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                border: '1px solid #e5e7eb'
+              }}>
+                <h3 style={{ color: '#6b7280', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Total Parcels Today
+                </h3>
+                <p style={{ fontSize: '48px', fontWeight: 'bold', color: '#1d4ed8', marginTop: '16px' }}>
+                  {stats.total}
+                </p>
+                <div style={{ height: '4px', width: '48px', backgroundColor: '#1d4ed8', borderRadius: '2px', marginTop: '16px' }}></div>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                <h3 className="text-gray-600 text-sm font-medium uppercase tracking-wide">Pending Assignment</h3>
-                <p className="text-5xl font-bold text-red-600 mt-4">{stats.pending}</p>
-                <div className="h-1 w-12 bg-red-600 rounded mt-4"></div>
+
+              {/* Pending Assignment Card */}
+              <div style={{ 
+                backgroundColor: 'white', 
+                padding: '24px', 
+                borderRadius: '12px', 
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                border: '1px solid #e5e7eb'
+              }}>
+                <h3 style={{ color: '#6b7280', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Pending Assignment
+                </h3>
+                <p style={{ fontSize: '48px', fontWeight: 'bold', color: '#dc2626', marginTop: '16px' }}>
+                  {stats.pending}
+                </p>
+                <div style={{ height: '4px', width: '48px', backgroundColor: '#dc2626', borderRadius: '2px', marginTop: '16px' }}></div>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                <h3 className="text-gray-600 text-sm font-medium uppercase tracking-wide">In Transit</h3>
-                <p className="text-5xl font-bold text-amber-600 mt-4">{stats.transit}</p>
-                <div className="h-1 w-12 bg-amber-600 rounded mt-4"></div>
+
+              {/* In Transit Card */}
+              <div style={{ 
+                backgroundColor: 'white', 
+                padding: '24px', 
+                borderRadius: '12px', 
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                border: '1px solid #e5e7eb'
+              }}>
+                <h3 style={{ color: '#6b7280', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  In Transit
+                </h3>
+                <p style={{ fontSize: '48px', fontWeight: 'bold', color: '#d97706', marginTop: '16px' }}>
+                  {stats.transit}
+                </p>
+                <div style={{ height: '4px', width: '48px', backgroundColor: '#d97706', borderRadius: '2px', marginTop: '16px' }}></div>
               </div>
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
-                <h3 className="text-gray-600 text-sm font-medium uppercase tracking-wide">Delivered Today</h3>
-                <p className="text-5xl font-bold text-teal-600 mt-4">{stats.delivered}</p>
-                <div className="h-1 w-12 bg-teal-600 rounded mt-4"></div>
+
+              {/* Delivered Today Card */}
+              <div style={{ 
+                backgroundColor: 'white', 
+                padding: '24px', 
+                borderRadius: '12px', 
+                boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+                border: '1px solid #e5e7eb'
+              }}>
+                <h3 style={{ color: '#6b7280', fontSize: '12px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Delivered Today
+                </h3>
+                <p style={{ fontSize: '48px', fontWeight: 'bold', color: '#0d9488', marginTop: '16px' }}>
+                  {stats.delivered}
+                </p>
+                <div style={{ height: '4px', width: '48px', backgroundColor: '#0d9488', borderRadius: '2px', marginTop: '16px' }}></div>
               </div>
             </div>
           )}
